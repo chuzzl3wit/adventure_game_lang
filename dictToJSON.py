@@ -3,24 +3,40 @@ import json
 value = {
 "rooms": {
   "room1": {
-    "desc": "cool room",
+    "image": "room1.png",
     "objects": ["table", "chair"],
     "exits": ["room2", "room8"]
   },
   "room2": {
-    "desc": "empty room",
+    "image": "room2.png",
     "objects": [],
     "exits": ["room9", "room1"]
   },
   "room8": {
-    "desc": "other cool room",
+    "image": "room8.png",
     "objects": ["spoon"],
     "exits": ["room1"]
   }
 },
-"objects": {},
+"objects": {
+  "table": {
+    "image": "table.png",
+    "x": 100,
+    "y": 200
+  },
+  "chair": {
+    "image": "chair.png",
+    "x": 0,
+    "y": 0
+  },
+  "spoon": {
+    "image": "spoon.png",
+    "x": 224,
+    "y": 256
+  }
+},
 "win": {
-  "room": "room2"
+  "object": "table"
 }
 }
 

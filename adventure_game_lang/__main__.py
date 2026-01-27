@@ -2,6 +2,7 @@ import adventure_game_lang as agl
 import pygame
 from pygame.locals import *
 import sys
+import os
 
 if len(sys.argv) == 1:
   raise ValueError("no file inputed")
@@ -10,9 +11,9 @@ fileName = sys.argv[1]
 with open(fileName) as f:
   code = f.read()
 
-state = agl.parser(code)
+gameState = agl.parser(code)
 
-playerstate = {
+playerState = {
   "currentRoom": "room1",
   "objects": []
 }
@@ -23,33 +24,36 @@ running = True
 fg = 250, 240, 230
 errorColour = 255, 0, 0
 
+fileDir = os.path.dirname(os.path.realpath(__file__))
+fileDir = os.path.dirname(fileDir)
+assetDir = fileDir+"/assets"
+
 while running:
     for event in pygame.event.get():
         if event.type == QUIT: 
             running = False
     
-    agl.desc_win(state, screen, playerstate)
+    agl.desc_win(gameState, screen, playerState)
     pygame.display.update() 
-    while not agl.check_win(state, playerstate):
-      agl.describe(state, playerstate["currentRoom"], screen)
+    while not agl.check_win(gameState, playerState):
+      agl.render_room(gameState, playerState["currentRoom"], screen, assetDir)
+      agl.render_obj(gameState, playerState["currentRoom"], screen, assetDir)
       pygame.display.update()
       action = input()
       screen.fill((0, 0, 0))
       font = pygame.font.SysFont(pygame.font.get_default_font(), 40)
       text = font.render(action, 0, fg)
       screen.blit(text, (0,440))
- 
- 
       try:
         if action.startswith("goto"):
           object = action.replace(action[0:5], "")
-          agl.goto(object, playerstate, state)
+          agl.goto(object, playerState, gameState)
         elif action.startswith("pickup"):
           object = action.replace(action[0:7], "")
-          agl.pickup(state, playerstate, object, playerstate["currentRoom"])
+          agl.pickup(gameState, playerState, object, playerState["currentRoom"])
         elif action == "inventory":
           print("\nInventory:\n")
-          print(" ".join(playerstate["objects"]))
+          print(" ".join(playerState["objects"]))
         else:
           raise KeyError("not a valid command")
       except Exception as e:
