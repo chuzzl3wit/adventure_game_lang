@@ -18,23 +18,28 @@ playerstate = {
 }
 
 pygame.init()
-screen = pygame.display.set_mode((500, 500))
+screen = pygame.display.set_mode((640, 480))
 running = True
+fg = 250, 240, 230
+errorColour = 255, 0, 0
 
 while running:
     for event in pygame.event.get():
         if event.type == QUIT: 
             running = False
     
-    print(agl.desc_win(state))
-    screen.fill((0,0,0))
+    agl.desc_win(state, screen, playerstate)
+    pygame.display.update() 
     while not agl.check_win(state, playerstate):
-      print(agl.describe(state, playerstate["currentRoom"]))
+      agl.describe(state, playerstate["currentRoom"], screen)
+      pygame.display.update()
       action = input()
-      my_font = pygame.font.SysFont('Comic Sans MS', 30)
-      text_surface = my_font.render("bosh", False, (0, 0, 0))
-      screen.blit(text_surface, (0,0))
-
+      screen.fill((0, 0, 0))
+      font = pygame.font.SysFont(pygame.font.get_default_font(), 40)
+      text = font.render(action, 0, fg)
+      screen.blit(text, (0,440))
+ 
+ 
       try:
         if action.startswith("goto"):
           object = action.replace(action[0:5], "")
@@ -48,10 +53,15 @@ while running:
         else:
           raise KeyError("not a valid command")
       except Exception as e:
-        print(f"\nError, please try again: {e}")
+        fontErr = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+        textErr = fontErr.render(f"Error, please try again: {e}", 0, errorColour)
+        screen.blit(textErr, (0,0))
 
-    print("you win lol")
-    pygame.quit()
+    screen.fill((0, 0, 0))
+    winFont = pygame.font.SysFont(pygame.font.get_default_font(), 100)
+    winText = winFont.render("you win lol", 0, (255, 255, 0))
+    screen.blit(winText, (135,180))
+
 
 pygame.quit()
    

@@ -9,7 +9,7 @@ value = {
   },
   "room2": {
     "desc": "empty room",
-    "objects": ["spoon"],
+    "objects": [],
     "exits": ["room9", "room1"]
   },
   "room8": {
@@ -20,7 +20,7 @@ value = {
 },
 "objects": {},
 "win": {
-  "object": "spoon"
+  "room": "room2"
 }
 }
 
