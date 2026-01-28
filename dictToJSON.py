@@ -16,6 +16,11 @@ value = {
     "image": "room8.png",
     "objects": ["spoon"],
     "exits": ["room1"]
+  },
+    "room9": {
+    "image": "test_lowkey.png",
+    "objects": [],
+    "exits": ["room2", "room1"]
   }
 },
 "objects": {
