@@ -31,6 +31,9 @@ while not agl.check_win(state, playerstate):
     elif action == "inventory":
       print(" ")
       print(" ".join(playerstate["objects"]))
+    elif action.startswith("desc"):
+      object = action.replace(action[0:5], "")
+      print(agl.describe_obj(object, state, playerstate))
     else:
       raise KeyError("not a valid command")
   except Exception as e:

@@ -14,11 +14,21 @@ value = {
   },
   "room8": {
     "desc": "other cool room",
-    "objects": ["spoon"],
+    "objects": [],
     "exits": ["room1"]
   }
 },
-"objects": {},
+"objects": {
+  "spoon": {
+    "desc": "a silver spoon"
+  },
+  "table": {
+    "desc": "cool wooden table"
+  },
+  "chair": {
+    "desc": "nice wooden chair"
+  }
+},
 "win": {
   "object": "spoon"
 }
