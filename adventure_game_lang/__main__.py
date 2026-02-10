@@ -1,5 +1,5 @@
 import adventure_game_lang as agl
-from colorist import red, bg_blue, Color, blue, bg_yellow
+from colorist import red, bg_blue, Color, blue, bg_yellow, bg_green
 import sys
 
 if len(sys.argv) == 1:
@@ -36,6 +36,8 @@ while not agl.check_win(state, playerstate):
     elif action.startswith("desc"):
       object = action.replace(action[0:5], "")
       bg_blue(agl.describe_obj(object, state, playerstate))
+    elif action == "h":
+      bg_green("pickup [object] - picks up object\ngoto [room] - goes to that room\ndesc [object] - describes that object\ninventory - shows inventory")
     else:
       raise KeyError("not a valid command")
   except Exception as e:
