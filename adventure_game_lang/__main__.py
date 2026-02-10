@@ -1,4 +1,5 @@
 import adventure_game_lang as agl
+from colorist import red, bg_blue, Color, blue, bg_yellow
 import sys
 
 if len(sys.argv) == 1:
@@ -15,10 +16,11 @@ playerstate = {
   "objects": []
 }
 
-print(agl.desc_win(state))
+blue(agl.desc_win(state))
 
 while not agl.check_win(state, playerstate):
   print(agl.describe(state, playerstate["currentRoom"]))
+  print(f"\nEnter Command: {Color.BLUE}(h for help){Color.OFF}")
   action = input()
 
   try:
@@ -30,16 +32,16 @@ while not agl.check_win(state, playerstate):
       agl.pickup(state, playerstate, object, playerstate["currentRoom"])
     elif action == "inventory":
       print(" ")
-      print(" ".join(playerstate["objects"]))
+      bg_blue(", ".join(playerstate["objects"]))
     elif action.startswith("desc"):
       object = action.replace(action[0:5], "")
-      print(agl.describe_obj(object, state, playerstate))
+      bg_blue(agl.describe_obj(object, state, playerstate))
     else:
       raise KeyError("not a valid command")
   except Exception as e:
-    print(f"\nError, please try again: {e}")
+    red(f"\nError, please try again: {e}")
 
-print("you win lol")
+bg_yellow("you win lol")
 
 
    
