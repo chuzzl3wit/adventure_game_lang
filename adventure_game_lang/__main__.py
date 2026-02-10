@@ -20,6 +20,7 @@ playerState = {
 
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption(fileName[0:len(fileName)-4])
 running = True
 fg = 250, 240, 230
 errorColour = 255, 0, 0
@@ -52,8 +53,9 @@ while running:
           object = action.replace(action[0:7], "")
           agl.pickup(gameState, playerState, object, playerState["currentRoom"])
         elif action == "inventory":
-          print("\nInventory:\n")
-          print(" ".join(playerState["objects"]))
+          fontI = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+          textI = fontI.render(" ".join(playerState["objects"]), 0, (0, 255, 255))
+          screen.blit(textI, (0,0))
         else:
           raise KeyError("not a valid command")
       except Exception as e:
