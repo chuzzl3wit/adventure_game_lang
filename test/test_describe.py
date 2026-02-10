@@ -11,4 +11,4 @@ test_value = {
 }
 
 def test_describe():
-  assert "cool room" in agl.describe(test_value, "room1")
+  assert "cool room" in agl.render(test_value, "room1")
