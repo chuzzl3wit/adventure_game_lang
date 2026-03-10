@@ -7,3 +7,4 @@ from .checkwin import check_win
 from .checkwin import desc_win
 from .controller import controller
 from .view_term import view_term
+from .view_term import view_pygame
